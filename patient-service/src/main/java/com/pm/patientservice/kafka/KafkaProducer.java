@@ -16,19 +16,13 @@ public class KafkaProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-//    public void sendMessage(String topic, String message) {
-//        log.info("Sending message to Kafka topic {}: {}", topic, message);
-//        kafkaTemplate.send(topic, message);
-//    }
-
     public void sendEvent(Patient patient) {
         PatientEvent event = PatientEvent.newBuilder()
-                .setPatientId(patient.getId().toString())
-                .setName(patient.getName())
-                .setEmail(patient.getEmail())
-                .setEventType("PATIENT_CREATED")
-                .build();
-
+                                        .setPatientId(patient.getId().toString())
+                                        .setName(patient.getName())
+                                        .setEmail(patient.getEmail())
+                                        .setEventType("PATIENT_CREATED")
+                                        .build();
         try {
             log.info("Sending PatientEvent to Kafka: {}", event);
             kafkaTemplate.send("patient", event.toByteArray());
