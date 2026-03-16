@@ -30,16 +30,16 @@ public class AuthController {
     @Operation(summary = "Validate Token")
     @GetMapping("/validate")
     public ResponseEntity<Void> validateToken(@RequestHeader("Authorization") String authHeader) {
-//        System.out.println(authHeader);
+        System.out.println(authHeader);
         // Authorization: Bearer <token>
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
         String token = authHeader.substring(7);
-//        System.out.println("TOKEN : "+token);
+        System.out.println("TOKEN : "+token);
         boolean isValid = authService.validateToken(token);
-//        System.out.println(isValid);
+        System.out.println("isValid : "+isValid);
 
         if (isValid) {
             return ResponseEntity.ok().build();

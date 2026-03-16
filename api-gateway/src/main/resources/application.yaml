@@ -30,5 +30,12 @@ spring:
             filters:
               - RewritePath=/api-docs/patients,/v3/api-docs	
 
+            # Route for /api/docs/patients to patient-service /v3/api-docs
+          - id: api-docs-auth-route
+            uri: ${auth-service-route}
+            predicates:
+              - Path=/api-docs/auth
+            filters:
+              - RewritePath=/api-docs/auth,/v3/api-docs
 server:
   port: 4004 # Gateway listens on port 4004
